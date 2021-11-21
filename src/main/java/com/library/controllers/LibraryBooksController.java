@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 @Controller
 public class LibraryBooksController {
 
@@ -18,7 +23,18 @@ public class LibraryBooksController {
     @GetMapping("/librarybooks")
     public String libraryMain(Model model) {
         Iterable<Book> books = bookRepository.findAll();
-        model.addAttribute("books", books);
+        List<Book> bookList = new ArrayList<>();
+        books.forEach(bookList::add);
+
+        List<Book> bookListReverse = new ArrayList<>();
+
+        for (int i= bookList.size()-1; i>=0; i--)
+        {
+            bookListReverse.add(bookList.get(i));
+        }
+
+        model.addAttribute("books", bookListReverse);
+
         return "library-main";
     }
 
