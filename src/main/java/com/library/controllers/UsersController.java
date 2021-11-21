@@ -40,17 +40,23 @@ public class UsersController {
     }
 
     @PostMapping("/sign-up")
-    public String registration(@RequestParam String username, String password, Model model) {
+    public String registration(@RequestParam String username, String password, String confirmPassword, Model model) {
 
-        String hashedPassword = passwordEncoder.encode(password);
+        if (password.equals(confirmPassword)) {
 
-        User newUser = new User(username, hashedPassword);
+            String hashedPassword = passwordEncoder.encode(password);
 
-        newUser.setRole(Role.USER);
-        newUser.setStatus(Status.ACTIVE);
+            User newUser = new User(username, hashedPassword);
 
-        userRepository.save(newUser);
+            newUser.setRole(Role.USER);
+            newUser.setStatus(Status.ACTIVE);
 
-        return "redirect:/login";
+            userRepository.save(newUser);
+
+            return "redirect:/login";
+        }
+
+        model.addAttribute("message", "Пароли не совпадают");
+        return "sign-up";
     }
 }
