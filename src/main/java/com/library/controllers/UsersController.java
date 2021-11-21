@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
 
 @Controller
 public class UsersController {
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public ResponseEntity<Optional<User>> getUsersByName(String name) {
         return new ResponseEntity<Optional<User>>(userRepository.findByUsername(name), HttpStatus.OK);
@@ -39,7 +42,9 @@ public class UsersController {
     @PostMapping("/sign-up")
     public String registration(@RequestParam String username, String password, Model model) {
 
-        User newUser = new User(username, password);
+        String hashedPassword = passwordEncoder.encode(password);
+
+        User newUser = new User(username, hashedPassword);
 
         newUser.setRole(Role.USER);
         newUser.setStatus(Status.ACTIVE);
