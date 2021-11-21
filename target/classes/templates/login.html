@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Список литературы</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+  <style>
+    .base-0-2-161{color:#2C2D2E;margin:0;display:inline;font-size:15px;font-family:Helvetica, Arial, sans-serif;font-weight:400;line-height:20px;}
+    .small-0-2-170{font-size:13px;font-family:Helvetica, Arial, sans-serif;font-weight:400;line-height:18px;}
+    .error-0-2-176{color:#ED0A34;}
+  </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <!-- <h5 class="modal-title">Modal title</h5> -->
+        <h2 class="fw-bold mb-0">Login</h2>
+        <button type="button" class="btn-close" onclick="window.location.href = '/home';" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div th:if="${param.error}">
+        <small class="base-0-2-161 small-0-2-170 error-0-2-176 auto-0-2-186">Неверный пароль, попробуйте ещё раз</small>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form  method="post">
+          <div class="form-floating mb-3">
+            <input type="username" name="username" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
+          <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+          <hr class="my-4">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

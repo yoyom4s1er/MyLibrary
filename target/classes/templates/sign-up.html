@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список литературы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <!-- <h5 class="modal-title">Modal title</h5> -->
+                <h2 class="fw-bold mb-0">Sign up for free</h2>
+                <button type="button" class="btn-close" onclick="window.location.href = '/home';" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <h2 class="fw-bold mb-0" th:text="${message}"></h2>
+
+            <div class="modal-body p-5 pt-0">
+                <form  method="post">
+                    <div class="form-floating mb-3">
+                        <input type="username" name="username" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-4" id="floatingConfirmPassword" placeholder="Password">
+                        <label for="floatingPassword">Confirm password</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
+                    <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                    <hr class="my-4">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
