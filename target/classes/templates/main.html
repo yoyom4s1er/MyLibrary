@@ -15,9 +15,6 @@
   <span sec:authentication="principal.authorities"></span>
 </div>
 
-<form action="/logout" method="post">
-  <input type="submit" value="Sign Out"/>
-</form>
 <main>
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -40,26 +37,5 @@
   </div>
 
 </main>
-
-<div>
-  <form method="post">
-    <input type="text" name="text" placeholder="Введите сообщкние"/>
-    <input type="text" name="tag" placeholder="Тэг"/>
-    <button  type="submit">Добаввить</button>
-  </form>
-</div>
-
-<form method="post" action="/home">
-  <input type="text" name="filter">
-  <button type="submit">Найти</button>
-</form>
-
-<h1>Список сообщений</h1>
-
-<div th:each="el : ${messages}">
-  <h3 th:text="${el.text}"/>
-  <p th:text="${el.tag}"/>
-</div>
-
 </body>
 </html>

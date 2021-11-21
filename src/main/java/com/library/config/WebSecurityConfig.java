@@ -1,9 +1,11 @@
 package com.library.config;
 
+import com.library.models.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,7 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/img/**",
                         "/js/**").permitAll()
-                .antMatchers("/", "/home", "/sign-up", "/find").permitAll()
+                .antMatchers( "/home", "/sign-up").permitAll()
+                .antMatchers(HttpMethod.GET, "/librarybooks/add").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
                 .anyRequest()
                 .authenticated()
                 .and()
