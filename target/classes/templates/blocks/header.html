@@ -17,7 +17,14 @@
                 </form>
 
                 <div class="text-end">
-                    <button type="button" onclick="window.location.href = '/login';" class="btn btn-outline-light me-2">Login</button>
+                    <div sec:authorize="isAuthenticated()">
+                        <button type="button" onclick="window.location.href = '/logout';" class="btn btn-outline-light me-2">Logout</button>
+                    </div>
+                    <div sec:authorize="isAnonymous()">
+                        <button type="button" onclick="window.location.href = '/login';" class="btn btn-outline-light me-2">Login</button>
+                    </div>
+                </div>
+                <div>
                     <button type="button" onclick="window.location.href = '/sign-up';" class="btn btn-warning">Sign-up</button>
                 </div>
             </div>

@@ -9,10 +9,11 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-<li sec:authorize="hasAuthority('WRITE')">Entry 3</li>
-<li sec:authorize="hasAnyAuthority('READ', 'WRITE')">Entry 4</li>
-<span sec:authentication="principal.authorities"></span>
-
+<div sec:authorize="isAuthenticated()">
+  <li sec:authorize="hasAuthority('WRITE')">Entry 3</li>
+  <li sec:authorize="hasAnyAuthority('READ', 'WRITE')">Entry 4</li>
+  <span sec:authentication="principal.authorities"></span>
+</div>
 
 <form action="/logout" method="post">
   <input type="submit" value="Sign Out"/>
