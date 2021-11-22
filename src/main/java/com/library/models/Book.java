@@ -3,6 +3,7 @@ package com.library.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "book")
 public class Book {
 
     @Id

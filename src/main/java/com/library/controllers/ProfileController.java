@@ -1,6 +1,8 @@
 package com.library.controllers;
 
+import com.library.models.Book;
 import com.library.models.User;
+import com.library.repository.BookRepository;
 import com.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,13 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/profile")
 public class ProfileController {
 
-
+    @Autowired
+    BookRepository bookRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -30,8 +34,20 @@ public class ProfileController {
 
 
     @GetMapping("/{username}")
-    public String profile(@PathVariable String username, Model model) throws UsernameNotFoundException {
+    public String openProfile(@PathVariable String username, Model model) throws UsernameNotFoundException {
+
         model.addAttribute("username", username);
         return "profile";
+    };
+
+    @GetMapping("/repository")
+    public String openRepository(Model model) throws UsernameNotFoundException {
+
+        Iterable<Book> books = bookRepository.findAll();
+
+        model.addAttribute("books", books);
+
+        model.addAttribute("username", getCurrentUsername());
+        return "yourRepository";
     };
 }
