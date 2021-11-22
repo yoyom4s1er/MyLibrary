@@ -37,12 +37,16 @@ public class UsersController {
     private UserRepository userRepository;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+
+        model.addAttribute("username", getCurrentUsername());
         return "login";
     }
 
     @GetMapping("/sign-up")
-    public String signUp() {
+    public String signUp(Model model) {
+
+        model.addAttribute("username", getCurrentUsername());
         return "sign-up";
     }
 

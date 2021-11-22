@@ -1,0 +1,29 @@
+/*! CSS Used from: https://mybook.ru/_next/static/css/f6bb17c917ad1cf978b2.css */
+[class*=ant-]::-ms-clear,[class^=ant-]::-ms-clear{display:none;}
+[class*=ant-],[class*=ant-] *,[class*=ant-] :after,[class*=ant-] :before,[class^=ant-],[class^=ant-] *,[class^=ant-] :after,[class^=ant-] :before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+*,:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+a{color:#b34d00;text-decoration:none;background-color:transparent;outline:none;cursor:pointer;-webkit-transition:color .3s;transition:color .3s;-webkit-text-decoration-skip:objects;}
+a:hover{color:#d96500;}
+a:active,a:focus,a:hover{text-decoration:none;outline:0;}
+a{touch-action:manipulation;}
+::-moz-selection{color:#fff;background:#ffc72c;}
+::selection{color:#fff;background:#ffc72c;}
+/*! CSS Used from: https://mybook.ru/_next/static/css/f439ed05ae5ad7c74f80.css */
+.ant-col{position:relative;max-width:100%;min-height:1px;}
+.ant-col-xs-order-2{-moz-box-ordinal-group:3;order:2;}
+.ant-col-xs-0{display:none;}
+@media (min-width:1024px){
+    .ant-col-lg-3{display:block;-moz-box-flex:0;flex:0 0 25%;max-width:25%;}
+    .ant-col-lg-order-1{-moz-box-ordinal-group:2;order:1;}
+}
+/*! CSS Used from: https://mybook.ru/_next/static/css/97d37bf6f9cc3ea52e4a.css */
+*{-webkit-font-smoothing:antialiased;}
+.ant-col{position:relative;padding-right:12px;padding-left:60rem;}
+/*! CSS Used from: Embedded */
+.hyROfQ{width:100%;max-width:288px;margin-right:32px;padding:16px 0px;border-radius:12px;}
+.eYsMsZ{padding:8px 0px;font-weight:400;color:rgb(38, 38, 38);line-height:24px;font-size:16px;}
+.eYsMsZ:empty{height:12px;margin:12px 0px;border-radius:8px;}
+.eYsMsZ:first-child{padding-top:0px;}
+.ghGNED{margin-left:8px;font-size:12px;color:rgb(124, 127, 132);}
+.cyudjg{font-size:14px;line-height:24px;color:rgb(89, 89, 89);}
+.exIUkx{font-weight:600;font-size:24px;line-height:32px;color:black;}

@@ -1,9 +1,7 @@
 package com.library.models;
 
-import lombok.Data;
-import org.hibernate.Query;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.stereotype.Controller;
+
 
 import javax.persistence.*;
 
@@ -61,7 +59,17 @@ public class User {
         return role;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setRole(Role role) {
         this.role = role;
+
+
     }
 }
