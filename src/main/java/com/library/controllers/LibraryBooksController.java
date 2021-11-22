@@ -1,18 +1,23 @@
 package com.library.controllers;
 
 import com.library.models.Book;
+import com.library.models.User;
 import com.library.repository.BookRepository;
+import com.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.swing.text.View;
+import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class LibraryBooksController {
@@ -22,7 +27,14 @@ public class LibraryBooksController {
         return auth.getName();
     }
 
+    @ModelAttribute(value = "book")
+    public Book getBook()
+    {
+        return new Book();
+    }
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private BookRepository bookRepository;
@@ -44,6 +56,19 @@ public class LibraryBooksController {
         model.addAttribute("username", getCurrentUsername());
 
         return "library-main";
+    }
+
+    @PostMapping("/{id}")
+    public String bookSubscribe(@PathVariable Long id, Model model) {
+        User user = userRepository.findByUsername(getCurrentUsername()).get();
+
+        Book book = bookRepository.findById(id).get();
+
+        user.subscribe(book);
+
+        userRepository.save(user);
+
+        return "redirect:/librarybooks";
     }
 
     @GetMapping("/librarybooks/add")

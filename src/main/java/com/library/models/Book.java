@@ -1,6 +1,7 @@
 package com.library.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -11,6 +12,9 @@ public class Book {
     private Long id;
 
     private String name, time_to_export, time_to_import;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "books", cascade = CascadeType.ALL)
+    private Set<User> users;
 
 
     public Long getId() {
@@ -43,6 +47,14 @@ public class Book {
 
     public void setTime_to_import(String time_to_import) {
         this.time_to_import = time_to_import;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public Book() {

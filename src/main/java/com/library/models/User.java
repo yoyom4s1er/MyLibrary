@@ -4,6 +4,8 @@ import org.hibernate.annotations.NaturalId;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "user")
@@ -22,6 +24,15 @@ public class User {
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_subscriptions",
+            joinColumns = { @JoinColumn(name = "subscriber_id")},
+            inverseJoinColumns = { @JoinColumn(name = "book_id")}
+    )
+    private Set<Book> books = new HashSet<>();
 
     public User() {
     }
@@ -59,6 +70,14 @@ public class User {
         return role;
     }
 
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> bookSet) {
+        this.books = bookSet;
+    }
+
     public Long getId() {
         return id;
     }
@@ -71,5 +90,9 @@ public class User {
         this.role = role;
 
 
+    }
+
+    public void subscribe(Book book) {
+        getBooks().add(book);
     }
 }

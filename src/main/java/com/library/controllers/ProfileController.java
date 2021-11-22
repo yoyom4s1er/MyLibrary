@@ -42,10 +42,9 @@ public class ProfileController {
 
     @GetMapping("/repository")
     public String openRepository(Model model) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(getCurrentUsername()).get();
 
-        Iterable<Book> books = bookRepository.findAll();
-
-        model.addAttribute("books", books);
+        model.addAttribute("books", user.getBooks());
 
         model.addAttribute("username", getCurrentUsername());
         return "yourRepository";
