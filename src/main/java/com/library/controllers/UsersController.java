@@ -64,6 +64,10 @@ public class UsersController {
 
             userRepository.save(newUser);
 
+            if ( SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+                return "redirect:/home";
+            }
+
             return "redirect:/login";
         }
 
