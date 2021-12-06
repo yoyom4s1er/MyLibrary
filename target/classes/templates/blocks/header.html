@@ -8,8 +8,10 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/home" class="nav-link px-2 text-secondary">Home</a></li>
-                    <li><a href="/librarybooks" class="nav-link px-2 text-white">Литература</a></li>
-                    <li><a href="/librarybooks/add" class="nav-link px-2 text-white">Добавить книгу</a></li>
+                    <li><a href="/librarybooks" class="nav-link px-2 text-white">Библиотека</a></li>
+                    <li><a th:href="@{/profile/{username}(username=${username})}" class="nav-link px-2 text-white">Профиль</a></li>
+                    <li sec:authorize="hasAuthority('WRITE')"><a href="/librarybooks/add" class="nav-link px-2 text-white">Добавить книгу</a></li>
+
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -17,7 +19,14 @@
                 </form>
 
                 <div class="text-end">
-                    <button type="button" onclick="window.location.href = '/login';" class="btn btn-outline-light me-2">Login</button>
+                    <div sec:authorize="isAuthenticated()">
+                        <button type="button" onclick="window.location.href = '/logout';" class="btn btn-outline-light me-2">Logout</button>
+                    </div>
+                    <div sec:authorize="isAnonymous()">
+                        <button type="button" onclick="window.location.href = '/login';" class="btn btn-outline-light me-2">Login</button>
+                    </div>
+                </div>
+                <div>
                     <button type="button" onclick="window.location.href = '/sign-up';" class="btn btn-warning">Sign-up</button>
                 </div>
             </div>

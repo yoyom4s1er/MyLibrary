@@ -1,8 +1,8 @@
 package com.library.models;
 
 public enum Permission {
-    DEVELOPERS_READ("developers:read"),
-    DEVELOPERS_WRITE("developers:write");
+    DEVELOPERS_READ("READ"),
+    DEVELOPERS_WRITE("WRITE");
 
     private final String permission;
 

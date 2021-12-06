@@ -7,6 +7,8 @@ import com.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,31 +28,50 @@ public class UsersController {
         return new ResponseEntity<Optional<User>>(userRepository.findByUsername(name), HttpStatus.OK);
     }
 
+    public String getCurrentUsername() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
+    }
+
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+
+        model.addAttribute("username", getCurrentUsername());
         return "login";
     }
 
     @GetMapping("/sign-up")
-    public String signUp() {
+    public String signUp(Model model) {
+
+        model.addAttribute("username", getCurrentUsername());
         return "sign-up";
     }
 
     @PostMapping("/sign-up")
-    public String registration(@RequestParam String username, String password, Model model) {
+    public String registration(@RequestParam String username, String password, String confirmPassword, Model model) {
 
-        String hashedPassword = passwordEncoder.encode(password);
+        if (password.equals(confirmPassword)) {
 
-        User newUser = new User(username, hashedPassword);
+            String hashedPassword = passwordEncoder.encode(password);
 
-        newUser.setRole(Role.USER);
-        newUser.setStatus(Status.ACTIVE);
+            User newUser = new User(username, hashedPassword);
 
-        userRepository.save(newUser);
+            newUser.setRole(Role.USER);
+            newUser.setStatus(Status.ACTIVE);
 
-        return "redirect:/login";
+            userRepository.save(newUser);
+
+            if ( SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+                return "redirect:/home";
+            }
+
+            return "redirect:/login";
+        }
+
+        model.addAttribute("message", "Пароли не совпадают");
+        return "sign-up";
     }
 }

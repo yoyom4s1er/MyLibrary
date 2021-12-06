@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <title>Getting Started: Serving Web Content</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,10 +8,13 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<form action="/logout" method="post">
-  <input type="hidden" name="csrf" value="{{csrf.token}}">
-  <input type="submit" value="Sign Out"/>
-</form>
+
+<div sec:authorize="isAuthenticated()">
+  <li sec:authorize="hasAuthority('WRITE')">Entry 3</li>
+  <li sec:authorize="hasAnyAuthority('READ', 'WRITE')">Entry 4</li>
+  <span sec:authentication="principal.authorities"></span>
+</div>
+
 <main>
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -33,26 +37,5 @@
   </div>
 
 </main>
-
-<div>
-  <form method="post">
-    <input type="text" name="text" placeholder="Введите сообщкние"/>
-    <input type="text" name="tag" placeholder="Тэг"/>
-    <button  type="submit">Добаввить</button>
-  </form>
-</div>
-
-<form method="post" action="/home">
-  <input type="text" name="filter">
-  <button type="submit">Найти</button>
-</form>
-
-<h1>Список сообщений</h1>
-
-<div th:each="el : ${messages}">
-  <h3 th:text="${el.text}"/>
-  <p th:text="${el.tag}"/>
-</div>
-
 </body>
 </html>
